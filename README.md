@@ -1,6 +1,6 @@
 # iZone Website
 
-A business website for Izone Technologies.
+A company website for Izone Technologies.
 
 Built using:
 - React
