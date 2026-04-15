@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
-import { Crown, TrendingUp, Users, Briefcase, Quote, Star } from "lucide-react";
+import { TrendingUp, Users, Briefcase, Quote } from "lucide-react";
 
 const stats = [
   { icon: TrendingUp, value: "15+", label: "Years Experience" },
@@ -72,11 +72,6 @@ export default function CEOCard({ name, role, description, image }) {
                 <span className="px-3 py-1 rounded-full bg-primary/15 border border-primary/30 text-primary text-xs font-bold tracking-widest uppercase">
                   Leadership
                 </span>
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-primary text-primary" />
-                  ))}
-                </div>
               </div>
 
               {/* Name & role */}
