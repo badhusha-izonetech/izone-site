@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Target, Eye, Heart, Users, Award, Lightbulb, X, Images, Code2, Server, Database, ChevronLeft, ChevronRight, Sparkles, Globe2,
 } from "lucide-react";
@@ -151,33 +151,36 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.08 },
   },
 };
 
+const smoothEase = [0.16, 1, 0.3, 1];
+
 const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: smoothEase } },
 };
 
 const heroCopyVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.14, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.11, delayChildren: 0.16 },
   },
 };
 
 const heroCopyItemVariants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.95, ease: smoothEase },
   },
 };
 
 const About = () => {
+  const shouldReduceMotion = useReducedMotion();
   const { sitePhotos } = useAdmin();
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
@@ -276,8 +279,8 @@ const About = () => {
                 <span className="block">We build digital</span>
                 <span className="block">experiences that</span>
                 <motion.span
-                  animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  animate={shouldReduceMotion ? undefined : { backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
                   className="gradient-text-animated block pt-2"
                 >
                   move and convert.
@@ -291,8 +294,8 @@ const About = () => {
                 {["Web + Apps", "Growth Systems"].map((label, index) => (
                   <motion.span
                     key={label}
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ duration: 3.2, repeat: Infinity, delay: index * 0.25, ease: "easeInOut" }}
+                    animate={shouldReduceMotion ? undefined : { y: [0, -2, 0] }}
+                    transition={{ duration: 5.6, repeat: Infinity, delay: index * 0.35, ease: "easeInOut" }}
                     className="about-hero-text-tag"
                   >
                     {label}
@@ -302,27 +305,27 @@ const About = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.96, x: 20 }}
+              initial={{ opacity: 0, scale: 0.985, x: 10 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              transition={{ duration: 1.15, ease: smoothEase, delay: 0.18 }}
               className="about-hero-visual"
             >
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                animate={shouldReduceMotion ? undefined : { rotate: 360 }}
+                transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
                 className="about-hero-orbit about-hero-orbit-outer"
               />
               <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+                animate={shouldReduceMotion ? undefined : { rotate: -360 }}
+                transition={{ duration: 34, repeat: Infinity, ease: "linear" }}
                 className="about-hero-orbit about-hero-orbit-inner"
               />
 
               {aboutHeroOrbitItems.map((item) => (
                 <motion.div
                   key={item.label}
-                  animate={{ y: [0, -10, 0], scale: [1, 1.04, 1] }}
-                  transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: item.delay }}
+                  animate={shouldReduceMotion ? undefined : { y: [0, -6, 0], scale: [1, 1.02, 1] }}
+                  transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay: item.delay }}
                   className="about-hero-float-pill"
                   style={item}
                 >
@@ -331,14 +334,14 @@ const About = () => {
               ))}
 
               <motion.div
-                animate={{ y: [0, -12, 0], rotate: [0, 1.5, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                animate={shouldReduceMotion ? undefined : { y: [0, -6, 0], rotate: [0, 0.65, 0] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 className="about-hero-card about-hero-card-main"
               >
                 <div className="about-hero-card-glow" />
                 <motion.div
-                  animate={{ x: ["-120%", "160%"] }}
-                  transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 1.2 }}
+                  animate={shouldReduceMotion ? undefined : { x: ["-120%", "160%"] }}
+                  transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 2.2 }}
                   className="about-hero-card-sweep"
                 />
                 <div className="absolute inset-0 z-10 flex items-center justify-center">
@@ -349,8 +352,8 @@ const About = () => {
                   {[1, 2, 3].map((item, index) => (
                     <motion.div
                       key={item}
-                      animate={{ x: [0, index % 2 === 0 ? 18 : 10, 0], y: [0, -3, 0] }}
-                      transition={{ duration: 4.6 + index, repeat: Infinity, ease: "easeInOut", delay: index * 0.35 }}
+                      animate={shouldReduceMotion ? undefined : { x: [0, index % 2 === 0 ? 8 : 5, 0], y: [0, -2, 0] }}
+                      transition={{ duration: 7.4 + index * 1.2, repeat: Infinity, ease: "easeInOut", delay: index * 0.45 }}
                       className={`about-hero-lane about-hero-lane-${item}`}
                     >
                       <span className="about-hero-lane-icon">
@@ -365,8 +368,8 @@ const About = () => {
                     {["Discover", "Develop"].map((step, index) => (
                       <motion.div
                         key={step}
-                        animate={{ y: [0, -4, 0] }}
-                        transition={{ duration: 2.8, repeat: Infinity, delay: index * 0.25, ease: "easeInOut" }}
+                        animate={shouldReduceMotion ? undefined : { y: [0, -2, 0] }}
+                        transition={{ duration: 5.4, repeat: Infinity, delay: index * 0.35, ease: "easeInOut" }}
                         className="about-hero-flow-pill"
                       >
                         <span className="about-hero-flow-index">{String(index + 1).padStart(2, "0")}</span>
@@ -375,8 +378,8 @@ const About = () => {
                     ))}
                   </div>
                   <motion.div
-                    animate={{ y: [0, -8, 0], x: [0, 4, 0], scale: [1, 1.03, 1] }}
-                    transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
+                    animate={shouldReduceMotion ? undefined : { y: [0, -4, 0], x: [0, 2, 0], scale: [1, 1.015, 1] }}
+                    transition={{ duration: 7.8, repeat: Infinity, ease: "easeInOut" }}
                     className="about-hero-status"
                   >
                     <span className="about-hero-status-dot" />
