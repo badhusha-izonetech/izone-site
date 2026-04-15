@@ -18,8 +18,8 @@ function FloatingShape({ shape }) {
       <mesh ref={meshRef}>
         {geometry}
         <meshStandardMaterial
-          color="hsl(24, 94%, 50%)"
-          emissive="hsl(24, 94%, 50%)"
+          color="hsl(159, 58%, 34%)"
+          emissive="hsl(159, 58%, 34%)"
           emissiveIntensity={0.3}
           transparent
           opacity={0.8}
@@ -35,7 +35,7 @@ function Mini3DScene({ shape }) {
     <div className="w-16 h-16 relative">
       <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
         <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} color="hsl(24, 94%, 50%)" />
+        <pointLight position={[10, 10, 10]} intensity={1} color="hsl(159, 58%, 34%)" />
         <FloatingShape shape={shape} />
       </Canvas>
     </div>
@@ -148,3 +148,4 @@ export function FlipCard({
 }
 
 export default FlipCard;
+

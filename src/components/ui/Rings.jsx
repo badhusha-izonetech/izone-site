@@ -25,12 +25,12 @@ const CursorRings = () => {
   const idleTimeout = useRef();
 
   const colorPalette = [
-    "rgba(255, 94, 0, 0.7)",
-    "rgba(249, 115, 22, 0.7)",
-    "rgba(255, 148, 77, 0.7)",
-    "rgba(251, 146, 60, 0.7)",
-    "rgba(234, 88, 12, 0.7)",
-    "rgba(194, 65, 12, 0.7)",
+    "rgba(76, 175, 80, 0.7)",
+    "rgba(76, 175, 80, 0.7)",
+    "rgba(129, 199, 132, 0.7)",
+    "rgba(129, 199, 132, 0.7)",
+    "rgba(56, 142, 60, 0.7)",
+    "rgba(56, 142, 60, 0.7)",
   ];
 
   const colorChangeInterval = 6000;
@@ -148,3 +148,4 @@ const CursorRings = () => {
 };
 
 export default CursorRings;
+

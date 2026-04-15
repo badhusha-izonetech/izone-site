@@ -553,7 +553,9 @@ export default function Index() {
         <div className="container-custom relative">
           <motion.div variants={heroContainer} initial="hidden" animate="visible" className="mx-auto max-w-4xl translate-y-[80px] text-center">
                 <motion.h1 variants={heroItem} className="mt-7 text-balance text-[2.35rem] font-semibold leading-[1.05] text-white sm:text-[3.5rem] lg:text-[3.15rem] xl:text-[3.35rem]">
-                  <span className="whitespace-nowrap">Build Digital Experiences</span>
+                  <span className="min-[511px]:whitespace-nowrap">
+                    Build Digital <span className="max-[510px]:block">Experiences</span>
+                  </span>
                   <span className="block">
                     That <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"><TypingText /></span>
                   </span>

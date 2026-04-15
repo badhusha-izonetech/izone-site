@@ -88,7 +88,7 @@ function NotificationBell() {
 
   const typeIcon = (type) => {
     if (type === "job") return <Briefcase size={13} className="text-primary" />;
-    if (type === "intern") return <UserCheck size={13} className="text-orange-400" />;
+    if (type === "intern") return <UserCheck size={13} className="text-primary" />;
     if (type === "service") return <ClipboardList size={13} className="text-primary" />;
     return <Phone size={13} className="text-primary" />;
   };
@@ -262,7 +262,7 @@ export function AdminLayout({ children }) {
                 className={cn(
                   "group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all",
                   active
-                    ? "bg-primary/15 text-primary shadow-[0_10px_32px_rgba(249,115,22,0.10)]"
+                    ? "bg-primary/15 text-primary shadow-[0_10px_32px_rgba(76,175,80,0.10)]"
                     : "text-muted-foreground hover:bg-background/80 hover:text-foreground"
                 )}
               >

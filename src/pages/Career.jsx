@@ -61,14 +61,14 @@ function ApplyModal({ title, onClose, onSubmit, children, image }) {
         className="w-full rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row"
         style={{ maxWidth: 760, maxHeight: "calc(100vh - 1.5rem)" }}
       >
-        {/* Left orange panel — fixed width, hidden on mobile */}
+        {/* Left green panel — fixed width, hidden on mobile */}
         <div
           className="hidden md:flex flex-col items-center justify-center bg-primary p-8 relative overflow-hidden"
           style={{ width: 280, minWidth: 280, flexShrink: 0 }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.15),transparent_60%)]" />
           <img
-            src="https://illustrations.popsy.co/orange/work-from-home.svg"
+            src="https://illustrations.popsy.co/green/work-from-home.svg"
             alt=""
             aria-hidden="true"
             className="w-48 h-48 object-contain relative z-10 drop-shadow-xl"
@@ -81,10 +81,10 @@ function ApplyModal({ title, onClose, onSubmit, children, image }) {
 
         {/* Right white form panel */}
         <div className="flex flex-col flex-1 bg-white min-h-0 min-w-0">
-          {/* Mobile-only top orange banner */}
+          {/* Mobile-only top green banner */}
           <div className="md:hidden flex items-center gap-4 bg-primary px-5 py-4">
             <img
-              src="https://illustrations.popsy.co/orange/work-from-home.svg"
+              src="https://illustrations.popsy.co/green/work-from-home.svg"
               alt=""
               aria-hidden="true"
               className="w-16 h-16 object-contain shrink-0"
@@ -486,6 +486,7 @@ export default function Career() {
     </Layout>
   );
 }
+
 
 
 
