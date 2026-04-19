@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Code, Palette, Smartphone, Sparkles, Star, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, Code, Palette, Smartphone, Sparkles, Star } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -31,6 +31,19 @@ const heroItem = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
+const aboutContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.08 },
+  },
+};
+
+const aboutItem = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.62, ease: [0.22, 1, 0.36, 1] } },
+};
+
 function TypingText() {
   const prefersReducedMotion = useReducedMotion();
   const [wordIndex, setWordIndex] = useState(0);
@@ -60,9 +73,9 @@ function TypingText() {
 
   return (
     <span className="relative inline-flex items-baseline">
-      <span className="gradient-text">{shown}</span>
+      <span className="hero-typing-word">{shown}</span>
       {!prefersReducedMotion ? (
-        <span className="ml-1 inline-block w-[1ch] text-primary/70 animate-pulse">|</span>
+        <span className="hero-typing-caret ml-1 inline-block w-[1ch] animate-pulse">|</span>
       ) : null}
     </span>
   );
@@ -303,60 +316,32 @@ function PortfolioMasonry({ items }) {
   );
 }
 
-const ABOUT_LINES = [
+
+const ABOUT_PILLARS = [
+  {
+    icon: Sparkles,
+    title: "Discovery before pixels",
+    description: "We turn loose ideas into a clear plan before the first screen is designed.",
+  },
+  {
+    icon: Palette,
+    title: "Interfaces with intent",
+    description: "Every layout is shaped around readability, flow, and the next useful action.",
+  },
+  {
+    icon: Code,
+    title: "Builds ready to grow",
+    description: "Clean frontend structure, smooth handoff, and support after launch.",
+  },
+];
+
+const ABOUT_COPY = [
   "Izone Technologies started with a simple idea: build websites and apps that feel effortless to use.",
-  "Today, we help businesses launch modern digital experiences — from strategy and UI/UX to development and support.",
+  "Today, we help businesses launch modern digital experiences, from strategy and UI/UX to development and support.",
   "We care about clean typography, thoughtful interactions, and performance you can measure.",
 ];
 
-function AboutTypewriter() {
-  const [lineIdx, setLineIdx] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
-  const ref = useRef(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => setInView(e.isIntersecting),
-      { threshold: 0.3 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
-  // Reset and restart every time it enters view
-  useEffect(() => {
-    if (inView) {
-      setLineIdx(0); setDisplayed(""); setDone(false);
-    }
-  }, [inView]);
-
-  useEffect(() => {
-    if (!inView || done) return;
-    const line = ABOUT_LINES[lineIdx];
-    if (!line) { setDone(true); return; }
-    if (displayed.length < line.length) {
-      const t = setTimeout(() => setDisplayed(line.slice(0, displayed.length + 1)), 6);
-      return () => clearTimeout(t);
-    } else {
-      const t = setTimeout(() => { setLineIdx((i) => i + 1); setDisplayed(""); }, 150);
-      return () => clearTimeout(t);
-    }
-  }, [inView, done, lineIdx, displayed]);
-
-  return (
-    <div ref={ref} className="mt-4 space-y-3">
-      {ABOUT_LINES.map((line, i) => (
-        <p key={i} className="text-muted-foreground leading-relaxed min-h-[1.6em]">
-          {i < lineIdx ? line
-            : i === lineIdx ? <>{displayed}<span className="animate-pulse opacity-70">|</span></>
-            : ""}
-        </p>
-      ))}
-    </div>
-  );
-}
+const ABOUT_STEPS = ["Listen", "Shape", "Ship"];
 
 function ServiceModal({ svc, index, onClose }) {
   useEffect(() => {
@@ -547,7 +532,7 @@ export default function Index() {
             className="hero-bg-img"
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-foreground/72" />
+        <div className="absolute inset-0 hero-image-shade" />
         <div className="absolute inset-0 hero-tech-overlay" />
 
         <div className="container-custom relative">
@@ -557,7 +542,7 @@ export default function Index() {
                     Build Digital <span className="max-[510px]:block">Experiences</span>
                   </span>
                   <span className="block">
-                    That <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"><TypingText /></span>
+                    That <TypingText />
                   </span>
                 </motion.h1>
 
@@ -645,55 +630,113 @@ export default function Index() {
       </section>
 
       {/* About */}
-      <section className="section-padding">
-        <div className="container-custom grid lg:grid-cols-2 gap-10 items-center">
+      <section className="section-padding home-about-section">
+        <div className="container-custom grid gap-8 lg:grid-cols-[1fr_0.95fr] lg:items-center">
           <motion.div
-            initial={{ opacity: 0, x: -60, scale: 0.95 }}
-            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            variants={aboutContainer}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: false, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
+            className="home-about-copy"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 1.08 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: false, margin: "-80px" }}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative overflow-hidden rounded-3xl"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80"
-                alt="Workspace"
-                className="w-full rounded-3xl border border-border/70 shadow-[0_18px_70px_rgba(0,0,0,0.10)] object-cover"
-                loading="lazy"
-              />
-              <motion.div
-                initial={{ x: "-100%" }}
-                whileInView={{ x: "100%" }}
-                viewport={{ once: false, margin: "-80px" }}
-                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none"
-              />
+            <motion.span variants={aboutItem} className="section-label">About Us</motion.span>
+            <motion.h2 variants={aboutItem} className="section-title max-w-xl">
+              Thoughtful digital work, shaped with calm momentum.
+            </motion.h2>
+            <motion.div variants={aboutItem} className="home-about-story">
+              {ABOUT_COPY.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </motion.div>
+
+            <div className="mt-5 grid gap-2">
+              {ABOUT_PILLARS.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  variants={aboutItem}
+                  className="home-about-pillar"
+                  whileHover={prefersReducedMotion ? undefined : { x: 8 }}
+                  transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <span className="home-about-pillar-icon">
+                    <item.icon className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="home-about-pillar-title">{item.title}</span>
+                    <span className="home-about-pillar-copy">{item.description}</span>
+                  </span>
+                  <span className="home-about-pillar-number">{String(index + 1).padStart(2, "0")}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div variants={aboutItem} className="mt-6 flex flex-wrap items-center gap-3">
+              <Button asChild className="rounded-[8px] px-6">
+                <Link to="/about">
+                  Learn More <ArrowRight />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="rounded-[8px] px-6">
+                <Link to="/contact">Talk to Us</Link>
+              </Button>
             </motion.div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 42, scale: 0.96 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: false, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="home-about-visual"
           >
-            <span className="section-label">About Us</span>
-            <h2 className="section-title">A small team with a big focus: clarity.</h2>
-            <AboutTypewriter />
-            <div className="mt-7 flex items-center gap-3">
-              <Button asChild className="rounded-full">
-                <Link to="/about">Learn More About Us</Link>
-              </Button>
-              <Button asChild variant="outline" className="rounded-full">
-                <Link to="/contact">Talk to Us</Link>
-              </Button>
-            </div>
+            <motion.div
+              className="home-about-image-wrap"
+              whileHover={prefersReducedMotion ? undefined : { rotate: -1.2, scale: 1.015 }}
+              transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <motion.img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1100&q=80"
+                alt="Team planning a digital project"
+                className="home-about-image"
+                loading="lazy"
+                animate={prefersReducedMotion ? undefined : { scale: [1, 1.045, 1], x: [0, -8, 0] }}
+                transition={prefersReducedMotion ? undefined : { duration: 9, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <span className="home-about-scan" aria-hidden="true" />
+            </motion.div>
+
+            <motion.div
+              className="home-about-note home-about-note-top"
+              animate={prefersReducedMotion ? undefined : { y: [0, -12, 0], rotate: [-1, 1, -1] }}
+              transition={prefersReducedMotion ? undefined : { duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <span className="home-about-note-label">Now refining</span>
+              <strong>Clarity, layout, motion</strong>
+            </motion.div>
+
+            <motion.div
+              className="home-about-note home-about-note-bottom"
+              animate={prefersReducedMotion ? undefined : { y: [0, 10, 0], rotate: [1, -1, 1] }}
+              transition={prefersReducedMotion ? undefined : { duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 0.35 }}
+            >
+              <span className="home-about-live-dot" />
+              Smooth launch support
+            </motion.div>
+
+            <motion.div
+              className="home-about-workflow"
+              variants={aboutContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, margin: "-80px" }}
+            >
+              {ABOUT_STEPS.map((step, index) => (
+                <motion.div key={step} variants={aboutItem} className="home-about-workflow-step">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{step}</strong>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -787,9 +830,6 @@ export default function Index() {
     </Layout>
   );
 }
-
-
-
 
 
 
