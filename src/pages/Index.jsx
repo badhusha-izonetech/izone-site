@@ -536,8 +536,8 @@ export default function Index() {
         <div className="absolute inset-0 hero-tech-overlay" />
 
         <div className="container-custom relative">
-          <motion.div variants={heroContainer} initial="hidden" animate="visible" className="mx-auto max-w-4xl translate-y-[80px] text-center">
-                <motion.h1 variants={heroItem} className="mt-7 text-balance text-[2.35rem] font-semibold leading-[1.05] text-white sm:text-[3.5rem] lg:text-[3.15rem] xl:text-[3.35rem]">
+          <motion.div variants={heroContainer} initial="hidden" animate="visible" className="home-hero-content mx-auto max-w-4xl text-center">
+                <motion.h1 variants={heroItem} className="home-hero-title mt-7 text-balance text-[2.35rem] font-semibold leading-[1.05] text-white sm:text-[3.5rem] lg:text-[3.15rem] xl:text-[3.35rem]">
                   <span className="min-[511px]:whitespace-nowrap">
                     Build Digital <span className="max-[510px]:block">Experiences</span>
                   </span>
@@ -548,12 +548,12 @@ export default function Index() {
 
                 <motion.p
                   variants={heroItem}
-                  className="mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-white/78 sm:text-xl"
+                  className="home-hero-description mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-white/78 sm:text-xl"
                 >
                   We create websites, apps, and digital systems with a sharper visual identity, faster delivery, and a polished launch experience.
                 </motion.p>
 
-                <motion.div variants={heroItem} className="mt-9 flex flex-wrap items-center justify-center gap-4">
+                <motion.div variants={heroItem} className="home-hero-actions mt-9 flex flex-wrap items-center justify-center gap-4">
                   <Button asChild size="lg" className="h-14 rounded-full px-8 text-base">
                     <Link to="/get-started">
                       Get Started <ArrowRight />
@@ -564,7 +564,7 @@ export default function Index() {
                   </Button>
                 </motion.div>
 
-                <motion.div variants={heroItem} className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-white/82">
+                <motion.div variants={heroItem} className="home-hero-benefits mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-white/82">
                   {["Fast delivery", "Clean UI/UX", "Scalable builds"].map((item) => (
                     <span key={item} className="inline-flex items-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-primary" />
@@ -575,7 +575,7 @@ export default function Index() {
 
                 <motion.div
                   variants={heroItem}
-                  className="mt-12 flex items-center justify-center gap-3 text-xs font-medium uppercase tracking-[0.24em] text-white/50"
+                  className="home-hero-scroll mt-12 flex items-center justify-center gap-3 text-xs font-medium uppercase tracking-[0.24em] text-white/50"
                 >
                   <span className="h-px w-12 bg-white/18" />
                   Scroll
@@ -830,6 +830,5 @@ export default function Index() {
     </Layout>
   );
 }
-
 
 
