@@ -1,7 +1,9 @@
-<<<<<<< HEAD
+
+
 # Izone-site
 company website 
-=======
+
+
 # iZone Website
 
 A company website for Izone Technologies.
@@ -13,4 +15,4 @@ Built using:
 - Modern UI animations
 
 Deployed for production use.
->>>>>>> bc4389b (final one)
+
