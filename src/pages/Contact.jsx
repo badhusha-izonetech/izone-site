@@ -88,7 +88,7 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="contact-hero relative flex min-h-svh items-center overflow-hidden px-4 pt-32 pb-20 md:px-8 max-[430px]:!min-h-[38rem] max-[430px]:!items-start max-[430px]:!pt-24 max-[430px]:!pb-12">
+      <section className="contact-hero relative flex min-h-svh items-center overflow-hidden px-4 pt-32 pb-20 md:px-8">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
         <div className="container-custom relative z-10">
           <motion.div

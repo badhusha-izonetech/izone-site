@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
-export default function HeroOrbitBg() {
+export default function HeroOrbitBg({ className = "" }) {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`.trim()} aria-hidden="true">
       {/* Outer orbit ring */}
       <motion.div
         animate={{ rotate: 360 }}
@@ -14,15 +14,15 @@ export default function HeroOrbitBg() {
           height: "min(72rem, 140%)",
           transform: "translate(-50%, -50%)",
           borderRadius: "999px",
-          border: "1px dashed rgba(165, 214, 167, 0.22)",
+          border: "1px dashed rgba(22, 125, 98, 0.18)",
         }}
       >
         {/* dot on outer ring */}
         <span style={{
           position: "absolute", top: "50%", left: "-0.3rem",
           width: "0.6rem", height: "0.6rem", borderRadius: "999px",
-          background: "linear-gradient(135deg, rgba(76,175,80,0.9), rgba(129,199,132,0.9))",
-          boxShadow: "0 0 0 6px rgba(255,255,255,0.55)",
+          background: "linear-gradient(135deg, rgba(22,125,98,0.92), rgba(54,178,149,0.78))",
+          boxShadow: "0 0 0 6px rgba(255,255,255,0.45)",
           transform: "translateY(-50%)",
         }} />
       </motion.div>
@@ -38,14 +38,14 @@ export default function HeroOrbitBg() {
           height: "min(52rem, 105%)",
           transform: "translate(-50%, -50%)",
           borderRadius: "999px",
-          border: "1px dashed rgba(165, 214, 167, 0.15)",
+          border: "1px dashed rgba(22, 125, 98, 0.14)",
         }}
       >
         <span style={{
           position: "absolute", top: "50%", right: "-0.3rem",
           width: "0.5rem", height: "0.5rem", borderRadius: "999px",
-          background: "rgba(76,175,80,0.7)",
-          boxShadow: "0 0 0 5px rgba(255,255,255,0.45)",
+          background: "rgba(22,125,98,0.72)",
+          boxShadow: "0 0 0 5px rgba(255,255,255,0.4)",
           transform: "translateY(-50%)",
         }} />
       </motion.div>
@@ -61,7 +61,7 @@ export default function HeroOrbitBg() {
           height: "min(34rem, 70%)",
           transform: "translate(-50%, -50%)",
           borderRadius: "999px",
-          border: "1px dashed rgba(165, 214, 167, 0.12)",
+          border: "1px dashed rgba(22, 125, 98, 0.12)",
         }}
       />
 
@@ -72,7 +72,7 @@ export default function HeroOrbitBg() {
         transform: "translate(-50%, -50%)",
         width: "40rem", height: "40rem",
         borderRadius: "999px",
-        background: "radial-gradient(circle, rgba(165,214,167,0.10), transparent 65%)",
+        background: "radial-gradient(circle, rgba(22,125,98,0.10), transparent 65%)",
         filter: "blur(24px)",
       }} />
     </div>

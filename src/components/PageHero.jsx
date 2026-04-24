@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import HeroOrbitBg from "./ui/HeroOrbitBg";
 
 const heroVariants = {
   hidden: {},
@@ -31,15 +32,21 @@ function PageHero({
 }) {
   return (
     <section className={`page-hero page-hero--${theme}`}>
-
-
+      <div className="page-hero__backdrop" />
+      <div className="page-hero__grid" />
+      <div className="page-hero__glow page-hero__glow--one" />
+      <div className="page-hero__glow page-hero__glow--two" />
+      <div className="page-hero__ring page-hero__ring--one" />
+      <div className="page-hero__ring page-hero__ring--two" />
+      <div className="page-hero__beam" />
+      <HeroOrbitBg className="page-hero__orbit" />
 
       <div className="container-custom relative z-10 w-full">
         <motion.div
           variants={heroVariants}
           initial="hidden"
           animate="visible"
-          className="mx-auto max-w-4xl text-center"
+          className="page-hero__content mx-auto max-w-4xl text-center"
         >
           <motion.span variants={heroItemVariants} className="page-badge page-hero__badge">
             {badgeIcon ? <span className="page-hero__badge-icon">{badgeIcon}</span> : null}
@@ -54,14 +61,14 @@ function PageHero({
 
           <motion.h1
             variants={heroItemVariants}
-            className="page-hero__title font-display text-balance text-[3rem] font-bold leading-[0.95] sm:text-[4.35rem] lg:text-[5.3rem]"
+            className="page-hero__title font-display text-balance font-bold leading-[0.95]"
           >
             {title}
           </motion.h1>
 
           <motion.p
             variants={heroItemVariants}
-            className="page-hero__description mx-auto mt-6 max-w-2xl text-pretty text-lg leading-8 text-foreground/75 sm:text-[1.2rem]"
+            className="page-hero__description mx-auto mt-6 max-w-2xl text-pretty text-foreground/75"
           >
             {description}
           </motion.p>
