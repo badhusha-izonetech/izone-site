@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
-  Target, Eye, Heart, Users, Award, Lightbulb, X, Images, Code2, Server, Database, ChevronLeft, ChevronRight, Sparkles, Globe2,
+  Target, Eye, Heart, Users, Award, Lightbulb, X, Images, Code2, Server, Database, ChevronLeft, ChevronRight, Sparkles, Globe2, BookOpen,
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Layout from "@/components/Layout";
@@ -78,7 +78,7 @@ const ceoData = {
   name: "Mr.B.Kesavan M.E",
   role: "Founder/CEO",
   description:
-    "Visionary leader with 15+ years of experience in the tech industry. Kesavan founded Izone Technologies with a mission to democratize world-class web development and help businesses of all sizes achieve digital excellence.",
+    "Founder and CEO of Izone Technologies. Over 15 years building software for Indian and international businesses. Kesavan started Izone with a focus on engineering quality and long-term client partnerships — values that still shape every project the team takes on.",
 };
 
 const milestones = [
@@ -124,6 +124,13 @@ const milestones = [
     description: "Launched R&D division for emerging technologies.",
     label: "Future Ready",
     icon: Lightbulb,
+  },
+    {
+    year: "2026",
+    title: "Launching Course",
+    description: "Launched Courses For Job Opportunities .",
+    label: "Career Growth",
+    icon: BookOpen,
   },
 ];
 
@@ -272,7 +279,7 @@ const About = () => {
   return (
     <Layout hideNavbar={showAllPhotos}>
       {/* Hero Section */}
-      <section className="about-hero-section relative overflow-hidden px-4 md:px-8">
+      <section className="about-hero-section relative overflow-hidden px-4 md:px-8" data-site-hero>
         <div className="about-hero-radial about-hero-radial-left" />
         <div className="about-hero-radial about-hero-radial-right" />
         <div className="container-custom relative z-10">
@@ -407,7 +414,7 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-8">
             {[{
               icon: Target, title: "Our Mission", dir: -30,
-              text: "We strive to develop smart application and websites for our clients for their IT efficiency and business profitability and to be a global leader and expert in providing Smart Training with smart skills.",
+              text: "To build dependable software, mobile, and AI solutions that improve our clients' efficiency, profitability, and customer experience — and to share that craft through hands-on training programs that grow the next generation of engineers.",
               tags: ["Smart Apps", "IT Efficiency", "Global Leader", "Smart Training"],
             }, {
               icon: Eye, title: "Our Vision", dir: 30,
@@ -430,7 +437,7 @@ const About = () => {
                     </div>
                     <h2 className="font-display text-xl font-bold">{title}</h2>
                   </div>
-                  <p className="relative z-10 text-muted-foreground text-sm leading-relaxed mb-5">{text}</p>
+                  <p className="relative z-10 text-white/85 text-sm leading-relaxed mb-5">{text}</p>
                   <div className="relative z-10 flex flex-wrap gap-2">
                     {tags.map((t) => (
                       <span key={t} className="px-3 py-1 rounded-full border border-primary/20 bg-card/80 text-xs font-medium text-foreground/80">{t}</span>
@@ -863,7 +870,4 @@ const About = () => {
 };
 
 export default About;
-
-
-
 

@@ -22,7 +22,7 @@ export default function StackStatCard({
 
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white text-primary shadow-[0_6px_18px_hsl(var(--primary)/0.08)]">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border/70 bg-card text-primary shadow-[0_6px_18px_hsl(var(--primary)/0.08)]">
             {Icon ? <Icon className={`h-5 w-5 ${iconClassName}`} /> : null}
           </div>
           <div className="min-w-0 flex-1">
@@ -31,7 +31,7 @@ export default function StackStatCard({
             </h3>
           </div>
           {to ? (
-            <span className="mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition-transform duration-200 group-hover:translate-x-1">
+            <span className="mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border/70 bg-card text-primary transition-transform duration-200 group-hover:translate-x-1">
               <ArrowRight className="h-4 w-4" />
             </span>
           ) : null}

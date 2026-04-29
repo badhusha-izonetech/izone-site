@@ -53,10 +53,74 @@ import Services from "./pages/Services";
 
 
 const queryClient = new QueryClient();
+const HERO_SCROLLBAR_HIDDEN_CLASS = "hero-scrollbar-hidden";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
+function HeroScrollbarVisibility() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const clearHeroScrollbarState = () => {
+      document.documentElement.classList.remove(HERO_SCROLLBAR_HIDDEN_CLASS);
+      document.body.classList.remove(HERO_SCROLLBAR_HIDDEN_CLASS);
+    };
+
+    if (pathname === "/" || pathname.startsWith("/admin")) {
+      clearHeroScrollbarState();
+      return;
+    }
+
+    let observer;
+    let frameId = 0;
+    let cleanupResize = () => {};
+
+    const setHidden = (hidden) => {
+      document.documentElement.classList.toggle(HERO_SCROLLBAR_HIDDEN_CLASS, hidden);
+      document.body.classList.toggle(HERO_SCROLLBAR_HIDDEN_CLASS, hidden);
+    };
+
+    const updateFromHeroes = (heroes) => {
+      const hideScrollbar = heroes.some((hero) => {
+        const rect = hero.getBoundingClientRect();
+        const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        return visibleHeight > Math.min(rect.height * 0.35, window.innerHeight * 0.28) && rect.bottom > 96;
+      });
+
+      setHidden(hideScrollbar);
+    };
+
+    frameId = window.requestAnimationFrame(() => {
+      const heroes = Array.from(document.querySelectorAll("[data-site-hero]"));
+
+      if (heroes.length === 0) {
+        clearHeroScrollbarState();
+        return;
+      }
+
+      const syncVisibility = () => updateFromHeroes(heroes);
+      observer = new IntersectionObserver(syncVisibility, {
+        threshold: [0, 0.15, 0.35, 0.55, 0.8],
+      });
+
+      heroes.forEach((hero) => observer.observe(hero));
+      window.addEventListener("resize", syncVisibility);
+      cleanupResize = () => window.removeEventListener("resize", syncVisibility);
+      syncVisibility();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      observer?.disconnect();
+      cleanupResize();
+      clearHeroScrollbarState();
+    };
+  }, [pathname]);
+
   return null;
 }
 
@@ -119,6 +183,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
+            <HeroScrollbarVisibility />
             <ConditionalSiteBackground />
             <MobilePopup />
             <AnimatedRoutes />

@@ -31,7 +31,7 @@ function PageHero({
   actions,
 }) {
   return (
-    <section className={`page-hero page-hero--${theme}`}>
+    <section className={`page-hero page-hero--${theme}`} data-site-hero>
       <div className="page-hero__backdrop" />
       <div className="page-hero__grid" />
       <div className="page-hero__glow page-hero__glow--one" />

@@ -199,7 +199,7 @@ export function Navbar({ logoVisible = true, hideOnMobile = false, hide = false 
           </div>
           <div className="lg:hidden flex items-center">
             <Link to="/" className="flex items-center shrink-0 overflow-visible">
-              <img src="/hero/logo.png" alt="Izone" className="h-[56px] w-auto object-contain min-[431px]:h-16" />
+              <img src="/hero/logo.png" alt="Izone" className="h-[100px] w-auto object-contain min-[451px]:h-20" />
             </Link>
           </div>
 
@@ -246,7 +246,7 @@ export function Navbar({ logoVisible = true, hideOnMobile = false, hide = false 
             >
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-border">
-                <img src="/hero/logo.png" alt="Izone" className="h-10 w-auto" />
+                <img src="/hero/logo.png" alt="Izone" className="h-14 w-auto" />
                 <button
                   onClick={() => setIsOpen(false)}
                   className="w-9 h-9 flex items-center justify-center rounded-lg bg-muted text-muted-foreground hover:text-foreground transition-colors"

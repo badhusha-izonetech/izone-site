@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "border border-primary/35 bg-[linear-gradient(135deg,hsl(var(--primary)),hsl(158_48%_28%))] text-primary-foreground shadow-[0_14px_30px_hsl(var(--primary)/0.22)] hover:-translate-y-0.5 hover:shadow-[0_18px_38px_hsl(var(--primary)/0.28)] before:absolute before:inset-0 before:bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.08)_32%,rgba(255,255,255,0.45)_50%,rgba(255,255,255,0.08)_68%,transparent_100%)] before:animate-[button-shine_4.4s_ease-in-out_infinite] before:pointer-events-none",
+          "border border-primary/35 bg-[linear-gradient(135deg,hsl(var(--primary)),hsl(var(--primary)/0.86))] text-primary-foreground shadow-[0_14px_30px_hsl(var(--primary)/0.22)] hover:-translate-y-0.5 hover:shadow-[0_18px_38px_hsl(var(--primary)/0.28)] before:absolute before:inset-0 before:bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.08)_32%,rgba(255,255,255,0.45)_50%,rgba(255,255,255,0.08)_68%,transparent_100%)] before:animate-[button-shine_4.4s_ease-in-out_infinite] before:pointer-events-none",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:

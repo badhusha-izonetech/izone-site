@@ -196,7 +196,7 @@ const CursorRings = () => {
     <div style={{ 
       width: '100vw', 
       height: '100vh', 
-      background: 'radial-gradient(circle at 50% 50%, hsl(var(--site-background)) 0%, hsl(var(--site-background)) 100%)',
+      background: 'radial-gradient(circle at 50% 50%, hsl(var(--background)) 0%, hsl(var(--background)) 100%)',
       cursor: 'none',
       overflow: 'hidden',
       position: 'relative'
@@ -211,14 +211,14 @@ const CursorRings = () => {
             top: trail.y,
             width: `${trail.size}px`,
             height: `${trail.size}px`,
-            background: `hsl(${24 + Math.sin(noise.current) * 10}, 94%, 58%)`,
+            background: 'hsl(var(--primary) / 0.7)',
             borderRadius: '50%',
             pointerEvents: 'none',
             zIndex: 9997,
             transform: 'translate(-50%, -50%)',
             opacity: trail.life * 0.6,
             filter: 'blur(1px)',
-            boxShadow: `0 0 ${trail.size * 2}px hsl(${24 + Math.sin(noise.current) * 10}, 94%, 58%)`,
+            boxShadow: `0 0 ${trail.size * 2}px hsl(var(--primary) / 0.55)`,
           }}
         />
       ))}
@@ -226,7 +226,6 @@ const CursorRings = () => {
       {/* Cursor rings */}
       {Array(numRings).fill(null).map((_, i) => {
         const config = getRingConfig(i);
-        const hue = 24 + Math.sin(noise.current + i * 0.5) * 12;
         
         return (
           <div
@@ -238,15 +237,15 @@ const CursorRings = () => {
               left: 0,
               width: `${config.size}px`,
               height: `${config.size}px`,
-              border: `${config.thickness}px solid hsla(${hue}, 70%, ${50 + i * 5}%, ${config.opacity})`,
+              border: `${config.thickness}px solid hsl(var(--primary) / ${config.opacity})`,
               borderRadius: "50%",
               pointerEvents: "none",
               zIndex: 9999 - i,
-              background: i === 0 ? `radial-gradient(circle, hsla(${hue}, 70%, 60%, 0.2), transparent)` : "transparent",
+              background: i === 0 ? "radial-gradient(circle, hsl(var(--primary) / 0.18), transparent)" : "transparent",
               transform: "translate3d(0,0,0)",
               boxShadow: `
-                0 0 ${10 - i}px hsla(${hue}, 80%, 60%, ${config.opacity * 0.8}),
-                inset 0 0 ${8 - i}px hsla(${hue}, 80%, 60%, ${config.opacity * 0.4})
+                0 0 ${10 - i}px hsl(var(--primary) / ${config.opacity * 0.8}),
+                inset 0 0 ${8 - i}px hsl(var(--accent) / ${config.opacity * 0.4})
               `,
               filter: `blur(${config.blur}px)`,
               mixBlendMode: 'screen',
@@ -264,12 +263,12 @@ const CursorRings = () => {
           top: cursor.current.y,
           width: mouseDown ? '8px' : '5px',
           height: mouseDown ? '8px' : '5px',
-          background: `hsl(${24 + Math.sin(noise.current) * 10}, 94%, 64%)`,
+          background: 'hsl(var(--primary))',
           borderRadius: '50%',
           pointerEvents: 'none',
           zIndex: 10001,
           transform: 'translate(-50%, -50%)',
-          boxShadow: `0 0 15px hsl(${24 + Math.sin(noise.current) * 10}, 94%, 64%)`,
+          boxShadow: '0 0 15px hsl(var(--primary) / 0.7)',
           transition: 'width 0.2s, height 0.2s',
         }}
       />

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Code, Palette, Smartphone, Sparkles, Star } from "lucide-react";
+import { ArrowRight, Brain, CheckCircle2, Cloud, Code, Megaphone, Palette, Smartphone, Sparkles, Star } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
@@ -108,11 +108,11 @@ const FALLBACK_TESTIMONIALS = [
 const services = [
   {
     icon: Code,
-    title: "Web Development",
-    description: "Modern, scalable solutions built with the latest technologies.",
+    title: "Web & Software Development",
+    description: "Custom web apps and enterprise software, built to scale.",
     details:
       "From fast landing pages to complex web apps—built with best practices for performance, SEO, and maintainability.",
-    tags: ["React", "Next.js", "Node.js", "APIs", "SEO"],
+    tags: ["React", "Next.js", "Node.js", "APIs", "SaaS"],
     path: "/development?service=web-development",
   },
   {
@@ -141,6 +141,63 @@ const services = [
       "High-quality mobile experiences with scalable architecture, smooth UX, and performance you can feel.",
     tags: ["Android", "iOS", "Cross-platform", "Launch"],
     path: "/development?service=mobile-apps",
+  },
+];
+
+const homepageServices = [
+  {
+    icon: Code,
+    title: "Web & Software Development",
+    description: "Custom web apps and enterprise software, built to scale.",
+    details:
+      "React, Next.js, Node, Python, .NET. Architected for performance, observability, and a clean handoff.",
+    tags: ["React", "Next.js", "Node.js", "APIs", "SaaS"],
+    path: "/development?service=web-development",
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile App Development",
+    description: "Native and cross-platform apps users keep coming back to.",
+    details:
+      "iOS, Android, Flutter, React Native. From MVPs to App Store launches and post-launch growth.",
+    tags: ["iOS", "Android", "Flutter", "React Native"],
+    path: "/development/app-development",
+  },
+  {
+    icon: Brain,
+    title: "AI & Machine Learning",
+    description: "Practical AI that drives revenue, not just demos.",
+    details:
+      "Chatbots, computer vision, predictive analytics, GenAI integrations, and custom ML models trained on your data.",
+    tags: ["LLMs", "Computer Vision", "Predictive ML", "RAG"],
+    path: "/development/ai-ml",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    description: "Cloud-native infrastructure with CI/CD that just works.",
+    details:
+      "AWS, Azure, GCP. Containerization, IaC, monitoring, and 99.9% uptime SLAs for production workloads.",
+    tags: ["AWS", "Azure", "Docker", "Kubernetes", "CI/CD"],
+    path: "/development",
+  },
+  {
+    icon: Megaphone,
+    title: "Digital Marketing",
+    description: "Growth across SMS, WhatsApp, social, and content.",
+    details:
+      "Bulk SMS, WhatsApp marketing, social media management, content writing, and election campaigns.",
+    tags: ["SMS", "WhatsApp", "Social", "Content"],
+    path: "/services",
+  },
+  {
+    icon: Palette,
+    title: "UI/UX & Branding",
+    description: "Interfaces and identities that earn trust at first glance.",
+    details:
+      "Design systems, prototypes, polished UI, and full brand identities for digital and print.",
+    tags: ["Design Systems", "Prototypes", "Identity"],
+    path: "/development?service=ui-ux-design",
   },
 ];
 
@@ -320,25 +377,26 @@ function PortfolioMasonry({ items }) {
 const ABOUT_PILLARS = [
   {
     icon: Sparkles,
-    title: "Discovery before pixels",
-    description: "We turn loose ideas into a clear plan before the first screen is designed.",
+    title: "Discovery before code ",
+    description: "Every project starts with a clear scope, a defined success metric, and a written plan you can hold us to.",
   },
   {
     icon: Palette,
-    title: "Interfaces with intent",
-    description: "Every layout is shaped around readability, flow, and the next useful action.",
+    title: "Engineering, not just visuals",
+    description: "We build for performance, observability, and the day someone else has to maintain the code.",
   },
   {
     icon: Code,
-    title: "Builds ready to grow",
-    description: "Clean frontend structure, smooth handoff, and support after launch.",
+    title: "Built to grow with you",
+    description: " Architecture choices that handle 10x scale, plus the support contract that keeps it that way.",
   },
 ];
 
 const ABOUT_COPY = [
-  "Izone Technologies started with a simple idea: build websites and apps that feel effortless to use.",
-  "Today, we help businesses launch modern digital experiences, from strategy and UI/UX to development and support.",
-  "We care about clean typography, thoughtful interactions, and performance you can measure.",
+  "Izone Technologies started in 2016 with a simple goal: build software, mobile, and AI products that actually move the needle for businesses.",
+"Today we partner with companies across India and abroad on web platforms, mobile apps, AI integrations, cloud infrastructure, and end-to-end digital marketing.",
+"We care about engineering quality, measurable outcomes, and being the kind of technology partner that picks up the phone.",
+
 ];
 
 const ABOUT_STEPS = ["Listen", "Shape", "Ship"];
@@ -518,7 +576,7 @@ export default function Index() {
       hideScrollToTopOnMobile={false}
     >
       {/* Hero */}
-      <section ref={heroRef} className="hero-section relative overflow-hidden text-white">
+      <section ref={heroRef} className="hero-section relative overflow-hidden text-white" data-site-hero>
         <AnimatePresence mode="sync" initial={false}>
           <motion.img
             key={HERO_IMAGES[activeHeroImage]}
@@ -550,7 +608,7 @@ export default function Index() {
                   variants={heroItem}
                   className="home-hero-description mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-white/78 sm:text-xl"
                 >
-                  We create websites, apps, and digital systems with a sharper visual identity, faster delivery, and a polished launch experience.
+                 From custom software and AI integrations to mobile apps and growth marketing, Izone is your full-stack technology partner. Nine years. 100+ launches. One accountable team.
                 </motion.p>
 
                 <motion.div variants={heroItem} className="home-hero-actions mt-9 flex flex-wrap items-center justify-center gap-4">
@@ -565,7 +623,7 @@ export default function Index() {
                 </motion.div>
 
                 <motion.div variants={heroItem} className="home-hero-benefits mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-white/82">
-                  {["Fast delivery", "Clean UI/UX", "Scalable builds"].map((item) => (
+                  {["Production-grade engineering", "AI-ready architecture", "Measured outcomes"].map((item) => (
                     <span key={item} className="inline-flex items-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-primary" />
                       {item}
@@ -603,7 +661,7 @@ export default function Index() {
 
           <div className="px-1 py-4 sm:px-0 sm:py-6">
             <div className="home-services-grid grid gap-5 sm:grid-cols-2">
-              {services.map((svc, i) => (
+              {homepageServices.map((svc, i) => (
                 <ServiceShowcaseCard
                   key={svc.title}
                   svc={svc}
@@ -620,7 +678,7 @@ export default function Index() {
             {expandedServiceIndex !== -1 && (
               <ServiceModal
                 key={expandedServiceIndex}
-                svc={services[expandedServiceIndex]}
+                svc={homepageServices[expandedServiceIndex]}
                 index={expandedServiceIndex}
                 onClose={closeModal}
               />
@@ -641,7 +699,7 @@ export default function Index() {
           >
             <motion.span variants={aboutItem} className="section-label">About Us</motion.span>
             <motion.h2 variants={aboutItem} className="section-title max-w-xl">
-              Thoughtful digital work, shaped with calm momentum.
+              A technology partner you can build the next decade with .
             </motion.h2>
             <motion.div variants={aboutItem} className="home-about-story">
               {ABOUT_COPY.map((line) => (

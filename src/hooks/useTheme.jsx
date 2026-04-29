@@ -1,18 +1,23 @@
-import { useEffect, createContext, useContext } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
 
 const ThemeContext = createContext({ theme: "light", toggleTheme: () => {} });
 
 export function ThemeProvider({ children }) {
-  const theme = "light";
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") return "light";
+    return localStorage.getItem("izone-theme") || "light";
+  });
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add("light");
-    root.classList.remove("dark");
+    root.classList.remove("light", "dark");
+    root.classList.add(theme);
     localStorage.setItem("izone-theme", theme);
-  }, []);
+  }, [theme]);
 
-  const toggleTheme = () => {};
+  const toggleTheme = () => {
+    setTheme((current) => (current === "dark" ? "light" : "dark"));
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

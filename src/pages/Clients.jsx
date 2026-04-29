@@ -32,7 +32,7 @@ const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
 const clientCardPalette = {
   accent: "hsl(var(--primary))",
   accentSoft: "hsl(var(--primary) / 0.16)",
-  border: "linear-gradient(135deg, hsl(var(--site-highlight) / 0.82) 0%, hsl(var(--site-highlight) / 0.42) 52%, hsl(var(--site-background) / 0.92) 100%)",
+  border: "linear-gradient(135deg, hsl(var(--primary) / 0.52) 0%, hsl(var(--primary) / 0.24) 46%, hsl(var(--border) / 0.92) 100%)",
   glow: "0 24px 44px -28px hsl(var(--primary) / 0.42)",
   chipBg: "hsl(var(--primary) / 0.10)",
   chipBorder: "hsl(var(--primary) / 0.22)",
@@ -436,7 +436,7 @@ const Clients = () => {
                     <div
                       className="relative h-full rounded-[26px] px-4 py-4 sm:px-5 flex flex-col justify-between"
                       style={{
-                        background: "hsl(var(--site-background) / 0.96)",
+                        background: "hsl(var(--card) / 0.96)",
                       }}
                     >
                       <motion.div
@@ -458,7 +458,7 @@ const Clients = () => {
                             style={{ borderColor: p.accentSoft }}
                           />
                           <div
-                            className="flex h-12 w-12 items-center justify-center rounded-full border bg-white/90 shadow-sm transition-transform duration-300 group-hover:scale-110"
+                            className="flex h-12 w-12 items-center justify-center rounded-full border bg-card shadow-sm transition-transform duration-300 group-hover:scale-110"
                             style={{ borderColor: p.accentSoft }}
                           >
                             {client.image ? (
@@ -474,7 +474,7 @@ const Clients = () => {
                             )}
                           </div>
                           <span
-                            className="absolute -right-0.5 top-0 h-3 w-3 rounded-full border-2 border-white"
+                            className="absolute -right-0.5 top-0 h-3 w-3 rounded-full border-2 border-card"
                             style={{ backgroundColor: p.accent }}
                           />
                         </div>
@@ -508,7 +508,7 @@ const Clients = () => {
                               transition={{ duration: 1.1, delay: i * 0.08, ease: "easeOut" }}
                               className="h-full rounded-full"
                               style={{
-                                background: `linear-gradient(90deg, ${p.accent} 0%, hsl(var(--site-background) / 0.25) 100%)`,
+                                background: `linear-gradient(90deg, ${p.accent} 0%, hsl(var(--card) / 0.25) 100%)`,
                               }}
                             />
                           </div>

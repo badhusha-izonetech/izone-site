@@ -4,8 +4,17 @@ import { Canvas } from "@react-three/fiber";
 import { Float } from "@react-three/drei";
 import * as THREE from "three";
 
+function getThemeHsl(token, fallback) {
+  if (typeof window === "undefined") return fallback;
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+  if (!raw) return fallback;
+  const [h, s, l] = raw.split(/\s+/);
+  return `hsl(${h}, ${s}, ${l})`;
+}
+
 function FloatingShape({ shape }) {
   const meshRef = useRef(null);
+  const primaryColor = getThemeHsl("--primary", "hsl(159, 58%, 34%)");
   const geometry = {
     cube: <boxGeometry args={[1, 1, 1]} />,
     sphere: <sphereGeometry args={[0.6, 32, 32]} />,
@@ -18,8 +27,8 @@ function FloatingShape({ shape }) {
       <mesh ref={meshRef}>
         {geometry}
         <meshStandardMaterial
-          color="hsl(159, 58%, 34%)"
-          emissive="hsl(159, 58%, 34%)"
+          color={primaryColor}
+          emissive={primaryColor}
           emissiveIntensity={0.3}
           transparent
           opacity={0.8}
@@ -31,11 +40,13 @@ function FloatingShape({ shape }) {
 }
 
 function Mini3DScene({ shape }) {
+  const primaryColor = getThemeHsl("--primary", "hsl(159, 58%, 34%)");
+
   return (
     <div className="w-16 h-16 relative">
       <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
         <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} color="hsl(159, 58%, 34%)" />
+        <pointLight position={[10, 10, 10]} intensity={1} color={primaryColor} />
         <FloatingShape shape={shape} />
       </Canvas>
     </div>

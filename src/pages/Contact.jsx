@@ -6,6 +6,8 @@ import {
   MapPin,
   Send,
   Clock,
+  Building2,
+  GitBranch,
   Linkedin,
   Twitter,
   Github,
@@ -48,6 +50,36 @@ const socialLinks = [
   { icon: Instagram, href: "#", label: "Instagram" },
 ];
 
+const officeLocations = [
+  {
+    icon: Building2,
+    title: "Head Office",
+    details: [
+      "No:10/20, Second Floor,",
+      "Annai Residency,",
+      "Amma Mandapam road,",
+      "Mambalasalai, Srirangam,",
+      "Trichy - 620006",
+    ],
+  },
+  {
+    icon: GitBranch,
+    title: "Branch Office",
+    details: [
+      "Chennai",
+      "Coimbatore",
+      "Nagarkovil",
+      "Thiruvananthapuram",
+      "Salem",
+    ],
+    isList: true,
+  },
+];
+
+const officeAddress = "5th Cross Thillainagar, Tiruchirappalli 620018";
+const mapOpenUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(officeAddress)}`;
+const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(officeAddress)}&output=embed`;
+
 const Contact = () => {
   const { toast } = useToast();
   const { addContact } = useAdmin();
@@ -88,7 +120,7 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="contact-hero relative flex min-h-svh items-center overflow-hidden px-4 pt-32 pb-20 md:px-8">
+      <section className="contact-hero relative flex min-h-svh items-center overflow-hidden px-4 pt-32 pb-20 md:px-8" data-site-hero>
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
         <div className="container-custom relative z-10">
           <motion.div
@@ -229,6 +261,41 @@ const Contact = () => {
                   <Send className="ml-2 w-4 h-4" />
                 </Button>
               </form>
+
+              <div className="mt-10">
+                <h3 className="font-display text-2xl font-bold mb-6">
+                  Office Locations
+                </h3>
+                <div className="space-y-6">
+                  {officeLocations.map((office) => (
+                    <div key={office.title} className="glass-card p-6 hover-glow">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex shrink-0 items-center justify-center">
+                          <office.icon className="w-6 h-6 text-primary" />
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="font-display text-xl font-semibold mb-3">
+                            {office.title}
+                          </h3>
+                          {office.isList ? (
+                            <ul className="list-disc pl-5 space-y-1 text-primary font-medium break-words">
+                              {office.details.map((detail) => (
+                                <li key={detail}>{detail}</li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <div className="space-y-1 text-primary font-medium break-words">
+                              {office.details.map((detail) => (
+                                <p key={detail}>{detail}</p>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
             {/* Contact Info */}
@@ -236,6 +303,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: false }}
+              className="flex h-full flex-col"
             >
               <h2 className="font-display text-2xl font-bold mb-6">
                 Contact Information
@@ -279,19 +347,19 @@ const Contact = () => {
               </div>
 
               {/* Map Placeholder */}
-              <div className="glass-card overflow-hidden glow-border relative">
+              <div className="glass-card relative min-h-[320px] overflow-hidden glow-border sm:min-h-[420px] lg:flex-1 lg:min-h-[50px]">
                 {/* Clickable overlay to open Google Maps */}
                 <a
-                  href="https://maps.app.goo.gl/7g1cZQPEXRnqZfCr5"
+                  href={mapOpenUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="absolute inset-0 z-20"
                 ></a>
 
-                <div className="aspect-video bg-muted relative flex items-center justify-center overflow-hidden">
+                <div className="relative h-full bg-muted overflow-hidden">
                   {/* Embedded Map */}
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.918222876117!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1672e0e8b5ef%3A0x1234567890abcdef!2s123%20Tech%20Street%2C%20Silicon%20Valley!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                    src={mapEmbedUrl}
                     className="absolute inset-0 w-full h-full border-0"
                     allowFullScreen=""
                     loading="lazy"
@@ -352,7 +420,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-
-
-

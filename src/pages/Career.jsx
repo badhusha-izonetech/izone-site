@@ -29,11 +29,14 @@ const emptyIntern = { name: "", email: "", phone: "", address: "", role: "", dur
 const CAREER_HERO_IMAGE = "/assests/career.png";
 const ALLOWED_RESUME_EXTENSIONS = ["pdf", "doc", "docx"];
 const ALLOWED_RESUME_MESSAGE = "Only PDF, DOC, and DOCX files are allowed.";
+const FORM_INPUT_CLASS = "rounded-full border-input bg-background text-foreground placeholder:text-muted-foreground";
+const FORM_TEXTAREA_CLASS = "rounded-xl border-input bg-background text-foreground placeholder:text-muted-foreground resize-none";
+const FORM_UPLOAD_CLASS = "flex items-center gap-3 rounded-full border border-dashed border-input bg-muted/45 px-4 py-2.5 transition-colors hover:border-primary/50";
 
 function Field({ label, error, children }) {
   return (
     <div className="space-y-1.5">
-      <label className="text-sm font-semibold text-gray-900">{label}</label>
+      <label className="text-sm font-semibold text-foreground">{label}</label>
       {children}
       {error && <p className="text-xs text-primary">{error}</p>}
     </div>
@@ -82,7 +85,7 @@ function ApplyModal({ title, onClose, onSubmit, children, image }) {
         </div>
 
         {/* Right white form panel */}
-        <div className="flex flex-col flex-1 bg-white min-h-0 min-w-0">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-card text-card-foreground">
           {/* Mobile-only top green banner */}
           <div className="md:hidden flex items-center gap-4 bg-primary px-5 py-4">
             <img
@@ -99,12 +102,12 @@ function ApplyModal({ title, onClose, onSubmit, children, image }) {
           {/* Mobile header */}
           <div className="flex items-center justify-between px-5 pt-5 pb-3 shrink-0 md:pt-5">
             <div>
-              <p className="text-sm text-gray-400">Complete the form below to apply.</p>
+              <p className="text-sm text-muted-foreground">Complete the form below to apply.</p>
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="h-8 w-8 flex items-center justify-center rounded-full bg-white/35 hover:bg-primary/10 hover:text-primary text-gray-400 transition-colors shrink-0"
+              className="h-8 w-8 shrink-0 rounded-full bg-muted text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary flex items-center justify-center"
               aria-label="Close"
             >
               <X size={15} />
@@ -113,7 +116,7 @@ function ApplyModal({ title, onClose, onSubmit, children, image }) {
 
           {/* Mobile-only title */}
           <div className="md:hidden px-5 pb-3 shrink-0">
-            <h3 className="font-display font-bold text-base text-gray-900">{title}</h3>
+            <h3 className="font-display text-base font-bold text-foreground">{title}</h3>
           </div>
 
           {/* Form */}
@@ -121,11 +124,11 @@ function ApplyModal({ title, onClose, onSubmit, children, image }) {
             <div ref={scrollRef} className="overflow-y-auto px-5 pb-2 space-y-3 flex-1">
               {children}
             </div>
-            <div className="px-5 py-4 border-t border-gray-100 shrink-0 flex gap-3 justify-end sticky bottom-0 bg-white">
+            <div className="sticky bottom-0 flex shrink-0 justify-end gap-3 border-t border-border bg-card px-5 py-4">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2 rounded-full border border-gray-200 text-sm font-medium text-gray-400 hover:bg-white/25 transition-colors"
+                className="rounded-full border border-input px-5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted"
               >
                 Cancel
               </button>
@@ -423,33 +426,33 @@ export default function Career() {
       {jobModal && (
         <ApplyModal title={`Apply — ${jobModal.roleName}`} image="/assests/career.png" onClose={() => setJobModal(null)} onSubmit={submitJob}>
           <Field label="Full Name *" error={jobErrors.name}>
-            <Input placeholder="John Doe" value={jobForm.name} onChange={setJ("name")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="John Doe" value={jobForm.name} onChange={setJ("name")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Email *" error={jobErrors.email}>
-            <Input type="email" placeholder="john@example.com" value={jobForm.email} onChange={setJ("email")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input type="email" placeholder="john@example.com" value={jobForm.email} onChange={setJ("email")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Phone Number *" error={jobErrors.phone}>
-            <Input placeholder="+91 9999999999" value={jobForm.phone} onChange={setJ("phone")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="+91 9999999999" value={jobForm.phone} onChange={setJ("phone")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Qualification *" error={jobErrors.qualification}>
-            <Input placeholder="e.g. B.Tech in Computer Science" value={jobForm.qualification} onChange={setJ("qualification")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="e.g. B.Tech in Computer Science" value={jobForm.qualification} onChange={setJ("qualification")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Experience *" error={jobErrors.experience}>
-            <Input placeholder="e.g. 2 years in React development" value={jobForm.experience} onChange={setJ("experience")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="e.g. 2 years in React development" value={jobForm.experience} onChange={setJ("experience")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Address *" error={jobErrors.address}>
-            <Input placeholder="Your full address" value={jobForm.address} onChange={setJ("address")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="Your full address" value={jobForm.address} onChange={setJ("address")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Current Location">
-            <Input placeholder="e.g. Chennai, Tamil Nadu" value={jobForm.location} onChange={setJ("location")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="e.g. Chennai, Tamil Nadu" value={jobForm.location} onChange={setJ("location")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Cover Letter">
-            <Textarea placeholder="Tell us why you're a great fit..." rows={3} value={jobForm.message} onChange={setJ("message")} className="rounded-xl border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400 resize-none" />
+            <Textarea placeholder="Tell us why you're a great fit..." rows={3} value={jobForm.message} onChange={setJ("message")} className={FORM_TEXTAREA_CLASS} />
           </Field>
           <Field label="Resume / Document *" error={jobErrors.resume}>
-            <label className="flex items-center gap-3 px-4 py-2.5 rounded-full border border-dashed border-gray-300 bg-white/25 cursor-pointer hover:border-primary/50 transition-colors">
-              <Upload size={15} className="text-gray-400 shrink-0" />
-              <span className="text-sm text-gray-400 truncate">{jobForm.resumeName || "Upload resume (PDF, DOC, DOCX)"}</span>
+            <label className={`${FORM_UPLOAD_CLASS} cursor-pointer`}>
+              <Upload size={15} className="shrink-0 text-muted-foreground" />
+              <span className="truncate text-sm text-muted-foreground">{jobForm.resumeName || "Upload resume (PDF, DOC, DOCX)"}</span>
               <input type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className="hidden" onChange={handleFile(setJobForm, setJobErrors)} />
             </label>
           </Field>
@@ -460,23 +463,23 @@ export default function Career() {
       {internModal && (
         <ApplyModal title="Apply for Internship" image="/assests/career.png" onClose={() => setInternModal(false)} onSubmit={submitIntern}>
           <Field label="Full Name *" error={internErrors.name}>
-            <Input placeholder="John Doe" value={internForm.name} onChange={setI("name")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="John Doe" value={internForm.name} onChange={setI("name")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Email *" error={internErrors.email}>
-            <Input type="email" placeholder="john@example.com" value={internForm.email} onChange={setI("email")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input type="email" placeholder="john@example.com" value={internForm.email} onChange={setI("email")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Phone Number *" error={internErrors.phone}>
-            <Input placeholder="+91 9999999999" value={internForm.phone} onChange={setI("phone")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="+91 9999999999" value={internForm.phone} onChange={setI("phone")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Address *" error={internErrors.address}>
-            <Input placeholder="Your full address" value={internForm.address} onChange={setI("address")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="Your full address" value={internForm.address} onChange={setI("address")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Internship Role *" error={internErrors.role}>
             {internRoles.length > 0 ? (
               <select
                 value={internForm.role}
                 onChange={setI("role")}
-                className="w-full h-10 px-4 rounded-full border border-gray-200 bg-white/25 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="h-10 w-full rounded-full border border-input bg-background px-4 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring/40"
               >
                 <option value="">Select a role...</option>
                 {internRoles.map((r) => (
@@ -484,25 +487,25 @@ export default function Career() {
                 ))}
               </select>
             ) : (
-              <Input placeholder="e.g. Frontend Development Intern" value={internForm.role} onChange={setI("role")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+              <Input placeholder="e.g. Frontend Development Intern" value={internForm.role} onChange={setI("role")} className={FORM_INPUT_CLASS} />
             )}
           </Field>
           <Field label="Qualification *" error={internErrors.qualification}>
-            <Input placeholder="e.g. B.Tech 3rd Year, CS" value={internForm.qualification} onChange={setI("qualification")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="e.g. B.Tech 3rd Year, CS" value={internForm.qualification} onChange={setI("qualification")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Skills">
-            <Input placeholder="e.g. React, Node.js, Python" value={internForm.skills} onChange={setI("skills")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="e.g. React, Node.js, Python" value={internForm.skills} onChange={setI("skills")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Preferred Duration">
-            <Input placeholder="e.g. 3 months" value={internForm.duration} onChange={setI("duration")} className="rounded-full border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400" />
+            <Input placeholder="e.g. 3 months" value={internForm.duration} onChange={setI("duration")} className={FORM_INPUT_CLASS} />
           </Field>
           <Field label="Message">
-            <Textarea placeholder="Tell us about yourself..." rows={3} value={internForm.message} onChange={setI("message")} className="rounded-xl border-gray-200 bg-white/25 text-gray-900 placeholder:text-gray-400 resize-none" />
+            <Textarea placeholder="Tell us about yourself..." rows={3} value={internForm.message} onChange={setI("message")} className={FORM_TEXTAREA_CLASS} />
           </Field>
           <Field label="Resume / Document *" error={internErrors.resume}>
-            <label className="flex items-center gap-3 px-4 py-2.5 rounded-full border border-dashed border-gray-300 bg-white/25 cursor-pointer hover:border-primary/50 transition-colors">
-              <Upload size={15} className="text-gray-400 shrink-0" />
-              <span className="text-sm text-gray-400 truncate">{internForm.resumeName || "Upload resume (PDF, DOC, DOCX)"}</span>
+            <label className={`${FORM_UPLOAD_CLASS} cursor-pointer`}>
+              <Upload size={15} className="shrink-0 text-muted-foreground" />
+              <span className="truncate text-sm text-muted-foreground">{internForm.resumeName || "Upload resume (PDF, DOC, DOCX)"}</span>
               <input type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" className="hidden" onChange={handleFile(setInternForm, setInternErrors)} />
             </label>
           </Field>
@@ -511,6 +514,5 @@ export default function Career() {
     </Layout>
   );
 }
-
 
 

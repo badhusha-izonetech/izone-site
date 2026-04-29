@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/Layout';
+import HeroOrbitBg from '@/components/ui/HeroOrbitBg';
 
 const projects = [
   {
@@ -33,7 +34,7 @@ const projects = [
     title: 'Healthcare Portal',
     category: 'Web Application',
     description: 'Patient management system with appointment scheduling, telemedicine integration, and secure medical records.',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=500&fit=crop',
+    image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&h=500&fit=crop',
     tags: ['Vue.js', 'Python', 'PostgreSQL', 'HIPAA'],
     client: 'MediCare Plus',
   },
@@ -94,14 +95,21 @@ const Portfolio = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-40 pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+      <section className="relative min-h-[36rem] overflow-hidden pt-40 pb-28 md:min-h-[42rem] md:pt-44 md:pb-32" data-site-hero>
+        <div className="page-hero__backdrop" />
+        <div className="page-hero__grid" />
+        <div className="page-hero__glow page-hero__glow--one" />
+        <div className="page-hero__glow page-hero__glow--two" />
+        <div className="page-hero__ring page-hero__ring--one" />
+        <div className="page-hero__ring page-hero__ring--two" />
+        <div className="page-hero__beam" />
+        <HeroOrbitBg className="page-hero__orbit" />
         <div className="container-custom relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
+            className="mx-auto max-w-3xl pt-6 text-center md:pt-10"
           >
             <span className="page-badge">Our Portfolio</span>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
@@ -139,11 +147,6 @@ const Portfolio = () => {
                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Button size="icon" variant="outline" className="rounded-full bg-background/80 backdrop-blur-sm">
-                      <ExternalLink className="w-4 h-4" />
-                    </Button>
-                  </div>
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">

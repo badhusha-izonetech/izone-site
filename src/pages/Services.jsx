@@ -49,7 +49,7 @@ function ServicePageCard({ card }) {
       <div className="absolute bottom-6 right-6 h-7 w-7 rounded-br-xl border-b-[4px] border-r-[4px] border-accent" />
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white text-primary shadow-[0_6px_18px_hsl(var(--primary)/0.08)]">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border/70 bg-card text-primary shadow-[0_6px_18px_hsl(var(--primary)/0.08)]">
             <Icon className="h-5 w-5" />
           </div>
           <div className="flex-1 pt-1">
