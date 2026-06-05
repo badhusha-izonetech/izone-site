@@ -1,0 +1,5 @@
+export default function SiteBackground() {
+  return (
+    <div className="fixed inset-0 z-0 pointer-events-none bg-background" />
+  );
+}
