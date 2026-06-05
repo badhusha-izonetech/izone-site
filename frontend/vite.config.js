@@ -16,13 +16,16 @@ export default defineConfig({
   },
 
   build: {
-    target: "esnext",          // modern JS for smaller/faster output
-    sourcemap: false,          // remove debug info for smaller bundle
-    cssCodeSplit: true,        // split CSS per component/page
-    chunkSizeWarningLimit: 600, // warn if chunks exceed 600 KB
-  },
-
-  esbuild: {
-    drop: ["console", "debugger"], // remove console/debugger in prod
+    target: "esnext",
+    sourcemap: false,
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 600,
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
   },
 });
