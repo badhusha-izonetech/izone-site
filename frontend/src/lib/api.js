@@ -1,6 +1,7 @@
-const BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+const BASE = import.meta.env.VITE_API_URL || "";
 
 async function request(path, options = {}) {
+  if (!BASE) throw new Error("API not configured.");
   const token = localStorage.getItem("admin_token");
   const headers = { "Content-Type": "application/json", ...options.headers };
   if (token) headers["Authorization"] = `Bearer ${token}`;
