@@ -6,8 +6,17 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const dropConsole = () => ({
+  name: "drop-console",
+  renderChunk(code) {
+    return code
+      .replace(/\bconsole\.(log|warn|error|info|debug|trace)\s*\([^)]*\);?/g, "")
+      .replace(/\bdebugger;/g, "");
+  },
+});
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), dropConsole()],
 
   resolve: {
     alias: {
@@ -20,12 +29,5 @@ export default defineConfig({
     sourcemap: false,
     cssCodeSplit: true,
     chunkSizeWarningLimit: 600,
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
   },
 });
