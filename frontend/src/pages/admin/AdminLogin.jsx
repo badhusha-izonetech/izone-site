@@ -1,10 +1,73 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Lock, User, Eye, EyeOff } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Lock, User, Eye, EyeOff, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAdmin } from "@/context/AdminContext";
 import { api } from "@/lib/api";
+
+function ForgotPasswordModal({ onClose }) {
+  const [identifier, setIdentifier] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      const data = await api.forgotPassword(identifier);
+      setMessage(data.message);
+    } catch (err) {
+      setError(err.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.2 }}
+        className="w-full max-w-sm glass-card p-6 glow-border relative"
+      >
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 text-muted-foreground hover:text-foreground"
+        >
+          <X size={18} />
+        </button>
+
+        <h2 className="font-display text-lg font-bold mb-1">Forgot Password</h2>
+        <p className="text-muted-foreground text-xs mb-4">
+          Enter your username or email. We'll send a reset link if the account exists.
+        </p>
+
+        {message ? (
+          <p className="text-sm text-green-500 text-center py-2">{message}</p>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <Input
+              placeholder="Username or email"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+              className="bg-background border-border"
+              required
+            />
+            {error && <p className="text-sm text-destructive text-center">{error}</p>}
+            <Button type="submit" className="w-full glow-border hover-glow" disabled={loading}>
+              {loading ? "Sending..." : "Send Reset Link"}
+            </Button>
+          </form>
+        )}
+      </motion.div>
+    </div>
+  );
+}
 
 export default function AdminLogin() {
   const { adminLogin, isAdminLoggedIn } = useAdmin();
@@ -14,6 +77,7 @@ export default function AdminLogin() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showForgot, setShowForgot] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +96,9 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-8 relative overflow-hidden bg-background">
+      <AnimatePresence>
+        {showForgot && <ForgotPasswordModal onClose={() => setShowForgot(false)} />}
+      </AnimatePresence>
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -90,6 +157,16 @@ export default function AdminLogin() {
               </div>
             </div>
 
+            <div className="text-right">
+              <button
+                type="button"
+                onClick={() => setShowForgot(true)}
+                className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-2"
+              >
+                Forgot password?
+              </button>
+            </div>
+
             {error && <p className="text-sm text-destructive text-center">{error}</p>}
 
             <Button type="submit" className="w-full glow-border hover-glow" disabled={loading}>
@@ -101,5 +178,3 @@ export default function AdminLogin() {
     </div>
   );
 }
-
-

@@ -26,6 +26,7 @@ import InternManagement from "./pages/admin/InternManagement";
 import ClientManagement from "./pages/admin/ClientManagement";
 import TeamManagement from "./pages/admin/TeamManagement";
 import AdminLogin from "./pages/admin/AdminLogin";
+import ResetPassword from "./pages/admin/ResetPassword";
 import PhotoManagement from "./pages/admin/PhotoManagement";
 import ServiceRequestManagement from "./pages/admin/ServiceRequestManagement";
 import { ProtectedRoute } from "./components/admin";
@@ -158,6 +159,7 @@ function AnimatedRoutes() {
               <Route path="/services/whatsapp-marketing" element={<WhatsappMarketing />} />
               <Route path="/services/digital-election-campaign" element={<DigitalElectionCampaign />} />
               <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/reset-password" element={<ResetPassword />} />
               <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
               <Route path="/admin/popups" element={<ProtectedRoute><PopupManagement /></ProtectedRoute>} />
               <Route path="/admin/testimonials" element={<ProtectedRoute><TestimonialManagement /></ProtectedRoute>} />

@@ -26,6 +26,16 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ username, password }),
     }),
+  forgotPassword: (identifier) =>
+    request("/api/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ identifier }),
+    }),
+  resetPassword: (token, new_password) =>
+    request("/api/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify({ token, new_password }),
+    }),
 
   // Contacts
   createContact: (data) =>
