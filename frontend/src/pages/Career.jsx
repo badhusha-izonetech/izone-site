@@ -156,6 +156,8 @@ export default function Career() {
 
   const [jobRoles, setJobRoles] = useState([]);
   const [internRoles, setInternRoles] = useState([]);
+  const [jobPage, setJobPage] = useState(1);
+  const JOB_PER_PAGE = 10;
   const [jobModal, setJobModal] = useState(null);
   const [internModal, setInternModal] = useState(false);
   const [jobForm, setJobForm] = useState(emptyJob);
@@ -388,31 +390,62 @@ export default function Career() {
 
           {jobRoles.length === 0 ? (
             <p className="text-center text-muted-foreground py-12">No open positions at the moment. Check back soon!</p>
-          ) : (
-            <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: false }} className="space-y-4 max-w-4xl mx-auto">
-              {jobRoles.map((job) => (
-                <motion.div key={job.id} variants={itemVariants} className="glass-card p-6 hover-glow flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div>
-                    <h3 className="font-display font-semibold text-lg mb-2">{job.roleName}</h3>
-                    <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1"><GraduationCap className="w-4 h-4" />{job.qualification}</span>
-                      <span className="flex items-center gap-1"><Clock className="w-4 h-4" />{job.workTiming}</span>
-                      <span className="flex items-center gap-1"><MapPin className="w-4 h-4" />{job.location}</span>
-                      <span className="flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-                        <Briefcase className="w-3 h-3" />{job.workCulture}
-                      </span>
-                    </div>
-                  </div>
-                  <Button
-                    className="glow-border hover-glow shrink-0"
-                    onClick={() => { setJobModal(job); setJobForm(emptyJob); setJobErrors({}); }}
-                  >
-                    Apply Now
-                  </Button>
+          ) : (() => {
+            const totalPages = Math.ceil(jobRoles.length / JOB_PER_PAGE);
+            const paged = jobRoles.slice((jobPage - 1) * JOB_PER_PAGE, jobPage * JOB_PER_PAGE);
+            return (
+              <>
+                <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: false }} className="space-y-4 max-w-4xl mx-auto">
+                  {paged.map((job) => (
+                    <motion.div key={job.id} variants={itemVariants} className="glass-card p-6 hover-glow flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <div>
+                        <h3 className="font-display font-semibold text-lg mb-2">{job.roleName}</h3>
+                        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1"><GraduationCap className="w-4 h-4" />{job.qualification}</span>
+                          <span className="flex items-center gap-1"><Clock className="w-4 h-4" />{job.workTiming}</span>
+                          <span className="flex items-center gap-1"><MapPin className="w-4 h-4" />{job.location}</span>
+                          <span className="flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                            <Briefcase className="w-3 h-3" />{job.workCulture}
+                          </span>
+                        </div>
+                      </div>
+                      <Button
+                        className="glow-border hover-glow shrink-0"
+                        onClick={() => { setJobModal(job); setJobForm(emptyJob); setJobErrors({}); }}
+                      >
+                        Apply Now
+                      </Button>
+                    </motion.div>
+                  ))}
                 </motion.div>
-              ))}
-            </motion.div>
-          )}
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-1 mt-8">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                      <button
+                        key={p}
+                        onClick={() => setJobPage(p)}
+                        className={`w-9 h-9 rounded-full text-sm font-medium transition-colors ${
+                          p === jobPage
+                            ? "bg-primary text-white"
+                            : "text-primary hover:bg-primary/10"
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    ))}
+                    {jobPage < totalPages && (
+                      <button
+                        onClick={() => setJobPage((p) => p + 1)}
+                        className="ml-1 text-sm text-primary hover:underline px-2"
+                      >
+                        Next
+                      </button>
+                    )}
+                  </div>
+                )}
+              </>
+            );
+          })()}
         </div>
       </section>
 
